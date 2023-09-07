@@ -14,7 +14,7 @@ If you had already added this repo earlier, run `helm repo update` to retrieve
 the latest versions of the packages.  You can then run `helm search repo
 indico` to see the charts.
 
-To install the <release-name> chart:
+To install the `<release-name>` chart:
 
     helm install <release-name> nomad-indico/indico
 
