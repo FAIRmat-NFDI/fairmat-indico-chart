@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./image/
+      dockerfile: Dockerfile
+    # command: "./run_indico.sh"
+    ports:
+      - 80:59999
+    depends_on:
+      - redis
+      - db
+    volumes:
+      - type: bind
+        source: ./config/indico.conf
+        target: /opt/indico/etc/indico.conf
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - type: bind
+        source: ./config/init-db.sh
+        target: /docker-entrypoint-initdb.d/init-db.sh
+    environment:
+      - POSTGRES_DB=indico
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+
+  redis:
+    image: redis:7-alpine
+
+  celery-worker:
+    build:
+      context: ./image/
+      dockerfile: Dockerfile
+    command: "./run_celery.sh"
+    depends_on:
+      - app
+    volumes:
+      - type: bind
+        source: ./config/indico.conf
+        target: /opt/indico/etc/indico.conf
+
+volumes:
+  postgres_data:

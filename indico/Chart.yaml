@@ -1,0 +1,13 @@
+apiVersion: v2
+version: 0.1.0
+name: indico
+type: application
+description: Indico from CERN
+appVersion: "v3.2.7"
+dependencies:
+- name: postgresql
+  version: "11.x"
+  repository: https://charts.bitnami.com/bitnami
+- name: redis
+  version: "16.x"
+  repository: https://charts.bitnami.com/bitnami

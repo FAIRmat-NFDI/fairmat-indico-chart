@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "indico.fullname" . }}
+  labels:
+    {{- include "indico.labels" . | nindent 4 }}
+    app.kubernetes.io/component: app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "indico.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "indico.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: app
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "indico.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: config
+          configMap:
+            name: "{{ .Release.Name }}-config"
+      # initContainers:
+      # - name: check-db-ready
+      #   image: postgres:9.6.5
+      #   command: ['sh', '-c',
+      #     'until pg_isready -h postgres -p 5432;
+      #     do echo waiting for database; sleep 2; done;']
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: config
+              mountPath: /opt/indico/etc/indico.conf
+              subPath: indico.conf
+              readOnly: true
+            - name: config
+              mountPath: /opt/indico/uwsgi.ini
+              subPath: uwsgi.ini
+              readOnly: true
+          command:
+            - /opt/indico/run_indico.sh
+          ports:
+            - name: http-web-svc
+              containerPort: 59999
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 59999
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 59999
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
