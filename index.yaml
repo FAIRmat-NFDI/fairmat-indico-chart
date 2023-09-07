@@ -1,0 +1,21 @@
+apiVersion: v1
+entries:
+  indico:
+  - apiVersion: v2
+    appVersion: v3.2.7
+    created: "2023-09-07T13:07:04.066742415Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.x
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.x
+    description: Indico from CERN
+    digest: 9f9a8cc20188a1099488aef579bb42bfc60b76f0d2930a22a3e697f8b4555239
+    name: indico
+    type: application
+    urls:
+    - https://github.com/nomad-coe/indico/releases/download/indico-0.1.1/indico-0.1.1.tgz
+    version: 0.1.1
+generated: "2023-09-07T13:07:04.066754715Z"
