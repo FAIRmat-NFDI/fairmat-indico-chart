@@ -5,6 +5,7 @@ metadata:
 data:
   indico.conf: |
     # General settings
+    DEBUG = {{ .Values.indico.debug }}
     SQLALCHEMY_DATABASE_URI = "postgresql://{{ .Values.postgresql.auth.username }}:{{ .Values.postgresql.auth.password }}@{{ include "postgresql.primary.fullname" .Subcharts.postgresql }}/{{ .Values.postgresql.auth.database }}"
     SECRET_KEY = {{ .Values.indico.secretKey }}
     BASE_URL = {{ .Values.indico.baseUrl | quote }}

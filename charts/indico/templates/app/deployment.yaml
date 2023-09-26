@@ -58,14 +58,14 @@ spec:
             - name: http-web-svc
               containerPort: 59999
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: 59999
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 59999
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 59999
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 59999
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
