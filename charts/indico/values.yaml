@@ -2,8 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-
-# TODO: Helper
 # secretKey: python -c 'import os; print(repr(os.urandom(32)))'
 
 replicaCount: 1
@@ -99,6 +97,18 @@ indico:
     publicSupport: "support@example.com"
     noReply: "noreply@example.com"
 
+  # The localIdentities must be set to "True" to bootstrap the application because an initial admin
+  # account must be created. After keycloak is configured, another user can be granted admin privileges
+  # after which localIdentities can be disabled to avoid the Indico login page.
+  auth:
+    localIdentities: "True"
+    keycloak:
+      enabled: false
+      title: ""
+      clientId: ""
+      clientSecret: ""
+      profileUrl: "https://auth.example.com/realms/EXAMPLE/account/"
+      metadataUrl: "https://auth.example.com/realms/EXAMPLE/.well-known/openid-configuration"
 redis:
   auth:
     enabled: false
@@ -106,8 +116,8 @@ redis:
 postgresql:
   auth:
     database: "indico"
-    username: "username"
-    password: "password"
+    username: "indico"
+    password: "indico"
   primary:
     initdb:
       scripts:

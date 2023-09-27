@@ -33,6 +33,41 @@ data:
     # Disable system notices
     SYSTEM_NOTICES_URL = None
 
+    # Authentication settings
+    LOCAL_IDENTITIES = {{ .Values.indico.auth.localIdentities }}
+
+    {{- with .Values.indico.auth.keycloak }}
+    {{- if .enabled }}
+    # Keycloak
+    EXTERNAL_REGISTRATION_URL = {{ .profileUrl | quote }}
+    AUTH_PROVIDERS = {
+        'keycloak': {
+            'type': 'authlib',
+            'title': {{ .title | quote }},
+            'authlib_args': {
+                'client_id': {{ .clientId | quote }},
+                'client_secret': {{ .clientSecret | quote }},
+                'server_metadata_url': {{ .metadataUrl | quote }},
+                'client_kwargs': {'scope': 'openid'}
+            }
+        }
+    }
+    IDENTITY_PROVIDERS = {
+        'keycloak': {
+            'type': 'authlib',
+            'title': {{ .title | quote }},
+            'mapping': {
+                'first_name': 'given_name',
+                'last_name': 'family_name',
+                'email': 'email'
+            },
+            'trusted_email': True,
+            'synced_fields': {'first_name', 'last_name', 'email'}
+        }
+    }
+    {{- end }}
+    {{- end }}
+
 
   uwsgi.ini: |
     [uwsgi]
