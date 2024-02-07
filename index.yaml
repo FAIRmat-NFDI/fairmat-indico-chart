@@ -1,0 +1,21 @@
+apiVersion: v1
+entries:
+  indico:
+  - apiVersion: v2
+    appVersion: v3.2.7
+    created: "2024-02-07T15:30:49.019780032Z"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.x
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.x
+    description: Indico from CERN
+    digest: 21e68dee4c1040530bee23f4833206869d7734d4b153034674b2a49cf1aede9c
+    name: indico
+    type: application
+    urls:
+    - https://github.com/FAIRmat-NFDI/fairmat-indico-chart/releases/download/indico-0.1.5/indico-0.1.5.tgz
+    version: 0.1.5
+generated: "2024-02-07T15:30:49.019790011Z"
