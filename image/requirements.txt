@@ -1,3 +1,4 @@
 uwsgi
 indico
 indico-plugins
+indico-plugin-themes-fairmat @ git+https://github.com/FAIRmat-NFDI/fairmat-indico-theme@main

@@ -7,10 +7,10 @@
 replicaCount: 1
 
 image:
-  repository: gitlab-registry.mpcdf.mpg.de/nomad-lab/mpcdf-kubernetes/indico
+  repository:  ghcr.io/fairmat-nfdi/fairmat-indico-chart
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "main"
 
 imagePullSecrets: []
 
