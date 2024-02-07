@@ -4,7 +4,7 @@
 
 [Helm](https://helm.sh) must be installed to use the charts. Once Helm has been set up correctly, add the repo as follows:
 ```bash
-helm repo add nomad-indico https://nomad-coe.github.io/indico
+helm repo add nomad-indico https://FAIRmat-NFDI.github.io/fairmat-indico-chart
 helm repo update
 ```
 
