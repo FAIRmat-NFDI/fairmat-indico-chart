@@ -21,6 +21,8 @@ data:
     STORAGE_BACKENDS = { 'default': 'fs:/opt/indico/archive' }
     ATTACHMENT_STORAGE = "default"
 
+    PLUGINS = ['themes_fairmat', 'prometheus', 'previewer_jupyter', 'previewer_code']
+
     # Email settings
     SMTP_SERVER = ({{ .Values.indico.email.smtp.server | quote }}, {{ .Values.indico.email.smtp.port }})
     SMTP_USE_TLS = {{ .Values.indico.email.smtp.tls }}
