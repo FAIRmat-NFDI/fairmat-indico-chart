@@ -1,3 +1,5 @@
 uwsgi
 indico==3.2.9
-indico-plugins
+indico-plugin-prometheus
+indico-plugin-previewer-jupyter
+indico-plugin-previewer-code
