@@ -18,7 +18,8 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 COPY --chown=nonroot:nonroot requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+COPY --chown=nonroot:nonroot fairmat-indico-theme/ ./fairmat-indico-theme
+RUN pip install --no-cache-dir -r requirements.txt ./fairmat-indico-theme/
 
 # Workaround: create missing configs and folder structure
 # RUN ["/bin/bash", "-c", "mkdir -p --mode=775 /opt/indico/{etc,tmp,log,cache,archive}"]

@@ -1,9 +1,9 @@
 apiVersion: v2
-version: 0.1.6
+version: 0.1.7
 name: indico
 type: application
 description: Indico from CERN
-appVersion: "v3.2.7"
+appVersion: "v3.2.9"
 dependencies:
 - name: postgresql
   version: "11.x"

@@ -1,4 +1,3 @@
 uwsgi
-indico
+indico==3.2.9
 indico-plugins
-indico-plugin-themes-fairmat @ git+https://github.com/FAIRmat-NFDI/fairmat-indico-theme@main
