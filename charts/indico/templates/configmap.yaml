@@ -24,13 +24,15 @@ data:
     PLUGINS = ['themes_fairmat', 'prometheus', 'previewer_jupyter', 'previewer_code']
 
     # Email settings
-    SMTP_SERVER = ({{ .Values.indico.email.smtp.server | quote }}, {{ .Values.indico.email.smtp.port }})
+    SMTP_SERVER = ({{ .Values.indico.email.smtp.server | squote }}, {{ .Values.indico.email.smtp.port }})
     SMTP_USE_TLS = {{ .Values.indico.email.smtp.tls }}
-    SMTP_LOGIN = {{ .Values.indico.email.smtp.username | quote }}
-    SMTP_PASSWORD = {{ .Values.indico.email.smtp.password | quote }}
-    SUPPORT_EMAIL = {{ .Values.indico.email.support | quote }}
-    PUBLIC_SUPPORT_EMAIL = {{ .Values.indico.email.publicSupport | quote }}
-    NO_REPLY_EMAIL = {{ .Values.indico.email.noReply | quote }}
+    SMTP_LOGIN = {{ .Values.indico.email.smtp.username | squote }}
+    SMTP_PASSWORD = {{ .Values.indico.email.smtp.password | squote }}
+    SUPPORT_EMAIL = {{ .Values.indico.email.support | squote }}
+    PUBLIC_SUPPORT_EMAIL = {{ .Values.indico.email.publicSupport | squote }}
+    NO_REPLY_EMAIL = {{ .Values.indico.email.noReply | squote }}
+    SMTP_ALLOWED_SENDERS = set([{{- range .Values.indico.email.allowedSenders }}{{ .| squote }}, {{- end }}])
+    SMTP_SENDER_FALLBACK = {{ .Values.indico.email.senderFallback | squote }}
 
     # Disable system notices
     SYSTEM_NOTICES_URL = None
